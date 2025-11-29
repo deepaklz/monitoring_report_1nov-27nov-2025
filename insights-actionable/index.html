@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heat Plan Data Story: Operational Metrics</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Inter Font -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7f7fa;
+        }
+        .highlight-card {
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.06);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .highlight-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+    <!-- Load ApexCharts -->
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+</head>
+<body class="p-4 md:p-8">
+
+    <header class="text-center mb-12">
+        <h1 class="text-4xl md:text-5xl font-extrabold text-indigo-700">Heat Plan Creation Deep Dive</h1>
+        <p class="text-xl text-gray-600 mt-2">Visualizing Key Operational Metrics (Jul - Nov)</p>
+    </header>
+
+    <div id="infographic-container" class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        
+        <!-- Section 1: Monthly Heat Plan Status Overview (Jul-Nov) -->
+        <div class="highlight-card bg-white rounded-xl p-6 border-t-4 border-indigo-500 lg:col-span-2">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">1. Monthly Heat Plan Status Overview (%)</h2>
+            <p class="text-gray-500 mb-4">Tracking the distribution of heat plans by status across the months.</p>
+            <div id="chart1"></div>
+            <div class="mt-4 pt-4 border-t border-gray-100">
+                <p class="text-sm text-gray-600">
+                    <span class="font-semibold text-green-600 hover:text-green-800 cursor-pointer" title="Completed rate peaked at 41.02% in August, showing maximum operational efficiency then.">
+                        <svg class="w-4 h-4 inline-block align-text-top mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+                        Completed Peak: 41.02% in August, followed by a sharp drop to 24.40% in October.
+                    </span>
+                    <br>
+                    <span class="font-semibold text-red-600 hover:text-red-800 cursor-pointer" title="Pending rates remain high, averaging 57.01%, indicating a persistent backlog or systemic delay.">
+                        <svg class="w-4 h-4 inline-block align-text-top mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.3 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                        High Pending Rate: Averaging 57.01% overall, suggesting significant process bottlenecks.
+                    </span>
+                </p>
+            </div>
+        </div>
+
+        <!-- Section 2: Customer-Wise Heat Plan Creation (Jul-Nov) -->
+        <div class="highlight-card bg-white rounded-xl p-6 border-t-4 border-teal-500">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">2. Total Plans by Customer (Jul-Nov)</h2>
+            <p class="text-gray-500 mb-4">Distribution of total heat plans created across key customers (Total: 22,728).</p>
+            <div id="chart2"></div>
+            <div class="mt-4 pt-4 border-t border-gray-100">
+                <p class="text-sm text-gray-600">
+                    <span class="font-semibold text-teal-600 hover:text-teal-800 cursor-pointer" title="Vishwakarma Founders (8,288), Mal Metalliks (6,421), and Belgaum FerroCast (6,132) collectively create the majority of the volume.">
+                        <svg class="w-4 h-4 inline-block align-text-top mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+                        Top 3 Volume Drivers: Account for over 90% of all plan creations.
+                    </span>
+                </p>
+            </div>
+        </div>
+
+        <!-- Section 3: Customer-Wise Heat Plan Success Rate (Jul-Nov) -->
+        <div class="highlight-card bg-white rounded-xl p-6 border-t-4 border-purple-500">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">3. Customer Success Rate (%)</h2>
+            <p class="text-gray-500 mb-4">The percentage of created heat plans that result in successful operations (Overall: 82.13%).</p>
+            <div id="chart3"></div>
+            <div class="mt-4 pt-4 border-t border-gray-100">
+                <p class="text-sm text-gray-600">
+                    <span class="font-semibold text-purple-600 hover:text-purple-800 cursor-pointer" title="Nipha Exports (SRP) (92.45%), Shree Kedar Metals (91.00%), and Vishwakarma Founders (90.77%) demonstrate superior long-term efficiency.">
+                        <svg class="w-4 h-4 inline-block align-text-top mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                        High Performers: 3 customers above 90% success rate.
+                    </span>
+                    <br>
+                    <span class="font-semibold text-yellow-600 hover:text-yellow-800 cursor-pointer" title="Ramkrishna Forgings (43.48%) and Maxwell Auto Components (58.93%) show the lowest success rates and need targeted intervention.">
+                        <svg class="w-4 h-4 inline-block align-text-top mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.3 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                        Improvement Needed: Ramkrishna is significantly below 50% success.
+                    </span>
+                </p>
+            </div>
+        </div>
+
+        <!-- Section 4: October Low Success Rate Customer Contribution -->
+        <div class="highlight-card bg-white rounded-xl p-6 border-t-4 border-orange-500">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">4. November Unsuccess Contribution (%)</h2>
+            <p class="text-gray-500 mb-4">Proportionate contribution of customers to *unsuccessful* plans in November.</p>
+            <div id="chart4"></div>
+            <div class="mt-4 pt-4 border-t border-gray-100">
+                <p class="text-sm text-gray-600">
+                    <span class="font-semibold text-orange-600 hover:text-orange-800 cursor-pointer" title="Belgaum FerroCast (64.95%) and Vishwakarma Founders (28.97%) account for nearly 94% of all low success incidents in October.">
+                        <svg class="w-4 h-4 inline-block align-text-top mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"></path></svg>
+                        Focus Area: Belgaum and Vishwakarma are the priority for addressing October's drop-off in success.
+                    </span>
+                </p>
+            </div>
+        </div>
+
+        <!-- Section 5: Drop-off Analysis (UX Focused) -->
+        <div class="highlight-card bg-white rounded-xl p-6 border-t-4 border-pink-500">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">5. Drop-off Analysis (UX Focused)</h2>
+            <p class="text-gray-500 mb-4">Identifying where users abandon the heat plan creation process.</p>
+            <div id="chart5"></div>
+            <div class="mt-4 pt-4 border-t border-gray-100">
+                <p class="text-sm text-gray-600">
+                    <span class="font-semibold text-pink-600 hover:text-pink-800 cursor-pointer" title="Step 1 accounts for 96 out of 137 total drop-offs, making it the highest priority for UX improvement.">
+                        <svg class="w-4 h-4 inline-block align-text-top mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v13m0 0l-3-3m3 3l3-3"></path></svg>
+                        Primary Bottleneck: Step 1 represents 70% of all recorded drop-offs.
+                    </span>
+                    <br>
+                    <span class="font-semibold text-pink-600 hover:text-pink-800 cursor-pointer" title="Cancel button presses and drops at Step 3 are minimal (2 each), suggesting friction eases after the initial stage.">
+                        <svg class="w-4 h-4 inline-block align-text-top mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        Later Steps are Stable: Drops become negligible after Step 2.
+                    </span>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <footer class="text-center mt-12 pt-6 border-t border-gray-200 text-gray-500 text-sm lg:col-span-2">
+        Data Period: July to November | Total Plans: 22,728
+    </footer>
+
+    <script>
+        // --- NEW DATA DEFINITIONS (Jul-Nov) ---
+
+        // Section 1: Monthly Heat Plan Status Overview
+        const data1_months = ['Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Total'];
+        const data1_pouring = [0.23, 0.36, 0.22, 0.02, 0.08, 0.17];
+        const data1_ongoing = [5.48, 5.79, 12.06, 11.25, 10.70, 9.54];
+        const data1_completed = [35.14, 41.02, 32.80, 24.40, 34.96, 33.28];
+        const data1_pending = [59.15, 52.83, 54.92, 64.33, 54.25, 57.01];
+
+        // Section 2: Customer-Wise Heat Plan Creation
+        const data2 = [
+            { customer: 'Nipha Exports (SRP)', plans: 50 },
+            { customer: 'Ramkrishna Forgings', plans: 95 },
+            { customer: 'Maxwell Auto Components', plans: 109 },
+            { customer: 'P.C.Sons Castings', plans: 209 },
+            { customer: 'Crescent Foundry (GJ)', plans: 405 },
+            { customer: 'Sapre Precision Techologies', plans: 437 },
+            { customer: 'Shree Kedar Metals', plans: 582 },
+            { customer: 'Belgaum FerroCast', plans: 6132 },
+            { customer: 'Mal Metalliks', plans: 6421 },
+            { customer: 'Vishwakarma Founders', plans: 8288 }
+        ].sort((a, b) => a.plans - b.plans); // Sort for better visualization
+
+        // Section 3: Customer-Wise Heat Plan Success Rate
+        const data3 = [
+            { customer: 'Ramkrishna Forgings', success: 43.48 },
+            { customer: 'P.C.Sons Castings', success: 57.58 },
+            { customer: 'Maxwell Auto Components', success: 58.93 },
+            { customer: 'Sapre Precision Techologies', success: 59.26 },
+            { customer: 'Crescent Foundry (GJ)', success: 62.79 },
+            { customer: 'Belgaum FerroCast', success: 75.97 },
+            { customer: 'Vishwakarma Founders', success: 90.77 },
+            { customer: 'Shree Kedar Metals', success: 91.00 },
+            { customer: 'Nipha Exports (SRP)', success: 92.45 }
+        ].sort((a, b) => a.success - b.success); // Sort by success rate
+
+        // Section 4: October Low Success Rate Customer Contribution
+        const data4 = [
+            { customer: 'Sapre Precision Techologies', contribution: 0.47 },
+            { customer: 'Shree Kedar Metals', contribution: 1.87 },
+            { customer: 'Maxwell Auto Components', contribution: 3.74 },
+            { customer: 'Vishwakarma Founders', contribution: 28.97 },
+            { customer: 'Belgaum FerroCast', contribution: 64.95 }
+        ];
+
+        // Section 5: Drop-off Analysis (UX Focused)
+        const data5 = [
+            { step: 'Cancel Button Press', count: 2 },
+            { step: 'Step 3', count: 2 },
+            { step: 'Step 2', count: 37 },
+            { step: 'Step 1', count: 96 }
+        ].sort((a, b) => a.count - b.count); // Sort by count (for horizontal bar clarity)
+
+
+        // --- CHART 1: Monthly Heat Plan Status Overview (100% Stacked Column) ---
+        function renderChart1() {
+            const options = {
+                chart: {
+                    type: 'bar',
+                    height: 400,
+                    stacked: true,
+                    stackType: '100%',
+                    toolbar: { show: false }
+                },
+                series: [{
+                    name: 'Pending %',
+                    data: data1_pending,
+                }, {
+                    name: 'Completed %',
+                    data: data1_completed,
+                }, {
+                    name: 'Ongoing %',
+                    data: data1_ongoing,
+                }, {
+                    name: 'Pouring %',
+                    data: data1_pouring,
+                }],
+                xaxis: {
+                    categories: data1_months,
+                },
+                yaxis: {
+                    title: { text: 'Percentage' },
+                    max: 100,
+                    labels: { formatter: (val) => val.toFixed(0) + '%' }
+                },
+                tooltip: {
+                    y: { formatter: (val) => val.toFixed(2) + '%' }
+                },
+                colors: ['#EF4444', '#3B82F6', '#10B981', '#F59E0B'], // Red, Blue, Green, Yellow
+            };
+
+            new ApexCharts(document.querySelector("#chart1"), options).render();
+        }
+
+        // --- CHART 2: Customer-Wise Heat Plan Creation (Horizontal Bar) ---
+        function renderChart2() {
+            const options = {
+                chart: {
+                    type: 'bar',
+                    height: 400,
+                    toolbar: { show: false }
+                },
+                series: [{
+                    name: 'Heat Plans Created',
+                    data: data2.map(d => d.plans)
+                }],
+                xaxis: {
+                    categories: data2.map(d => d.customer),
+                    labels: { formatter: (val) => val.toLocaleString() }
+                },
+                plotOptions: {
+                    bar: {
+                        horizontal: true,
+                        borderRadius: 4,
+                        dataLabels: { position: 'top' }
+                    }
+                },
+                dataLabels: { enabled: true, formatter: (val) => val.toLocaleString() },
+                colors: ['#0D9488']
+            };
+
+            new ApexCharts(document.querySelector("#chart2"), options).render();
+        }
+
+        // --- CHART 3: Customer-Wise Heat Plan Success Rate (Horizontal Bar) ---
+        function renderChart3() {
+            const options = {
+                chart: {
+                    type: 'bar',
+                    height: 400,
+                    toolbar: { show: false }
+                },
+                series: [{
+                    name: 'Success Rate',
+                    data: data3.map(d => d.success)
+                }],
+                xaxis: {
+                    categories: data3.map(d => d.customer),
+                    min: 0,
+                    max: 100,
+                    labels: { formatter: (val) => val + '%' }
+                },
+                plotOptions: {
+                    bar: {
+                        horizontal: true,
+                        borderRadius: 4,
+                        dataLabels: { position: 'top' }
+                    }
+                },
+                dataLabels: { enabled: true, formatter: (val) => val.toFixed(2) + '%' },
+                colors: ['#9333EA']
+            };
+
+            new ApexCharts(document.querySelector("#chart3"), options).render();
+        }
+
+        // --- CHART 4: October Low Success Rate Contribution (Donut) ---
+        function renderChart4() {
+            const options = {
+                chart: {
+                    type: 'donut',
+                    height: 350,
+                    toolbar: { show: false }
+                },
+                series: data4.map(d => d.contribution),
+                labels: data4.map(d => d.customer),
+                dataLabels: {
+                    formatter: function (val) {
+                        return val.toFixed(1) + '%'
+                    }
+                },
+                legend: {
+                    position: 'bottom'
+                },
+                plotOptions: {
+                    pie: {
+                        donut: {
+                            labels: {
+                                show: true,
+                                total: {
+                                    show: true,
+                                    label: 'Total Unsuccess',
+                                    formatter: function (w) {
+                                        const total = w.globals.seriesTotals.reduce((a, b) => a + b, 0);
+                                        return total.toFixed(2) + '%';
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                colors: ['#F59E0B', '#EF4444', '#7C3AED', '#3B82F6', '#10B981']
+            };
+
+            new ApexCharts(document.querySelector("#chart4"), options).render();
+        }
+
+        // --- CHART 5: Drop-off Points (Horizontal Bar) ---
+        function renderChart5() {
+            const options = {
+                chart: {
+                    type: 'bar',
+                    height: 350,
+                    toolbar: { show: false }
+                },
+                series: [{
+                    name: 'Drop Count',
+                    data: data5.map(d => d.count)
+                }],
+                xaxis: {
+                    categories: data5.map(d => d.step),
+                },
+                plotOptions: {
+                    bar: {
+                        horizontal: true,
+                        borderRadius: 4,
+                        dataLabels: { position: 'top' }
+                    }
+                },
+                dataLabels: { enabled: true, formatter: (val) => val.toLocaleString() },
+                colors: ['#EC4899']
+            };
+
+            new ApexCharts(document.querySelector("#chart5"), options).render();
+        }
+
+        // Render all charts on window load
+        window.onload = function () {
+            renderChart1();
+            renderChart2();
+            renderChart3();
+            renderChart4();
+            renderChart5();
+        };
+    </script>
+</body>
+</html>
